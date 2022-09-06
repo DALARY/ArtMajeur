@@ -12,9 +12,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ContactController extends AbstractController
 {
-    #[Route('/contact', name: 'app_contact')]
+    #[Route('artmajeur/contact', name: 'app_contact')]
     public function index(ManagerRegistry $doctrine, Request $request): Response
     {
+        $user = $this->getUser();
         $entityManager = $doctrine->getManager();
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
@@ -24,6 +25,7 @@ class ContactController extends AbstractController
             $contact->setName($form['name']->getData());
             $contact->setEmail($form['email']->getData());
             $contact->setQuestion($form['question']->getData());
+            $contact->setUser($user);
 
             $entityManager->persist($contact);
             $entityManager->flush();

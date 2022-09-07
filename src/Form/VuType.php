@@ -3,27 +3,22 @@
 namespace App\Form;
 
 use App\Entity\Contact;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Entity\Vu;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ContactType extends AbstractType
+class VuType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class, [
-                'label' => 'Nom',
-            ])
-            ->add('email', TextType::class, [
-                'label' => 'Email',
-            ])
-            ->add('question', TextType::class, [
-                'label' => 'Question',
+            ->add('Valide', CheckboxType::class, [
+                'required' => false,
+                'value' => 1,
             ])
             ->add('save', SubmitType::class)
         ;
@@ -32,7 +27,7 @@ class ContactType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Contact::class,
+            'data_class' => Vu::class,
         ]);
     }
 }

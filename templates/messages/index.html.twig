@@ -9,12 +9,17 @@
 </style>
 
 <div class="example-wrapper">
-    {% for contacts in contact %}
+    {% for message in messages %}
         <div>
-            <h2>{{ contacts.name }}</h2>
-            <span>{{ contacts.email }}</span>
-            <div>{{ contacts.question}}</div>
+            <h2>{{ message.name }}</h2>
+            <span>{{ message.email }}</span>
+            <div>{{ message.question}}</div>
         </div>
-    {% endfor %}
+        {% if is_granted ('ROLE_ADMIN') %}
+            {{ form_start(form) }}        
+                {{form_rest(form)}}    
+            {{ form_end(form) }}
+        {% endif %}
+    {% endfor %}  
 </div>
 {% endblock %}

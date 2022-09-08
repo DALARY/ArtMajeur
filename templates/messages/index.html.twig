@@ -14,12 +14,10 @@
             <h2>{{ message.name }}</h2>
             <span>{{ message.email }}</span>
             <div>{{ message.question}}</div>
+            {% if is_granted('ROLE_ADMIN') %}
+                <button><a href="{{ path('app_messages_show', {'id': message.id}) }}">Voir</a></button>
+            {% endif %}
         </div>
-        {% if is_granted ('ROLE_ADMIN') %}
-            {{ form_start(form) }}        
-                {{form_rest(form)}}    
-            {{ form_end(form) }}
-        {% endif %}
     {% endfor %}  
 </div>
 {% endblock %}

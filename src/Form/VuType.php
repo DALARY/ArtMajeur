@@ -2,9 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Contact;
 use App\Entity\Vu;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -16,7 +14,7 @@ class VuType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Valide', CheckboxType::class, [
+            ->add('valide', CheckboxType::class, [
                 'required' => false,
                 'value' => 1,
             ])

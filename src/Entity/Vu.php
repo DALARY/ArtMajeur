@@ -15,10 +15,10 @@ class Vu
     private ?int $id = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $Valide = null;
+    private ?int $valide = null;
 
     #[ORM\OneToOne(inversedBy: 'vu', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Contact $message = null;
 
     public function getId(): ?int
@@ -28,12 +28,12 @@ class Vu
 
     public function getValide(): ?int
     {
-        return $this->Valide;
+        return $this->valide;
     }
 
-    public function setValide(int $Valide): self
+    public function setValide(int $valide): self
     {
-        $this->Valide = $Valide;
+        $this->valide = $valide;
 
         return $this;
     }

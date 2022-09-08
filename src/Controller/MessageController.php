@@ -14,19 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class MessageController extends AbstractController
 {
     #[Route('/artmajeur/messages', name: 'app_messages')]
-    public function messages(ManagerRegistry $doctrine, Request $request): Response
+    public function messages(ManagerRegistry $doctrine): Response
     {
-        $entityManager = $doctrine->getManager();
-        $vu = new Vu();
-        $form = $this->createForm(VuType::class, $vu);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $vu->setValide($form['Valide']->getData());
-
-            $entityManager->persist($vu);
-            $entityManager->flush();
-        }
         if ($this->isGranted('ROLE_ADMIN')) {
             $entityManager = $doctrine->getManager();
             $messages = $entityManager->getRepository(Contact::class)->findAll();
@@ -40,8 +29,32 @@ class MessageController extends AbstractController
         return $this->render('messages/index.html.twig', [
             'controller_name' => 'MessagesController',
             'messages' => $messages,
+        ]);
+    }
+
+    #[Route('/artmajeur/messages/show/{id}', name: 'app_messages_show')]
+    public function messages_show(ManagerRegistry $doctrine, Request $request, $id): Response
+    {   
+        $entityManager = $doctrine->getManager();
+        $show = $entityManager->getRepository(Contact::class)->find($id);
+
+        $vu = new Vu();
+        $form = $this->createForm(VuType::class, $vu);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $vu->setValide($form['valide']->getData());
+            $show->setVu($vu);
+
+            $entityManager->persist($vu);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_messages');
+        }
+    
+        return $this->render('messages/show.html.twig', [
+            'controller_name' => 'MessagesController',
+            'show' => $show,
             'form' => $form->createView(),
         ]);
-        
-    }    
+    }
+
 }

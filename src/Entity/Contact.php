@@ -27,6 +27,9 @@ class Contact
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\OneToOne(mappedBy: 'message', cascade: ['persist', 'remove'])]
+    private ?Vu $vu = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,23 @@ class Contact
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getVu(): ?Vu
+    {
+        return $this->vu;
+    }
+
+    public function setVu(Vu $vu): self
+    {
+        // set the owning side of the relation if necessary
+        if ($vu->getMessage() !== $this) {
+            $vu->setMessage($this);
+        }
+
+        $this->vu = $vu;
 
         return $this;
     }

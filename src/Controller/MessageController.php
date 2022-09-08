@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MessageController extends AbstractController
 {
+    // Affichage de tout les messages en partie admin et affichage de tout les messages de la personne concerner
     #[Route('/artmajeur/messages', name: 'app_messages')]
     public function messages(ManagerRegistry $doctrine): Response
     {
@@ -32,6 +33,7 @@ class MessageController extends AbstractController
         ]);
     }
 
+    // Aperçu des messages uniques avec validation d'un admin
     #[Route('/artmajeur/messages/show/{id}', name: 'app_messages_show')]
     public function messages_show(ManagerRegistry $doctrine, Request $request, $id): Response
     {   
@@ -49,11 +51,34 @@ class MessageController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('app_messages');
         }
-    
+        
         return $this->render('messages/show.html.twig', [
             'controller_name' => 'MessagesController',
             'show' => $show,
             'form' => $form->createView(),
+        ]);
+    }
+
+    // Création du fichier JSON
+    #[Route('/artmajeur/messages/show/{id}/json', name: 'app_messages_json')]
+    public function messages_json(ManagerRegistry $doctrine, $id): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $show = $entityManager->getRepository(Contact::class)->find($id);
+
+        $data = array();
+        $data['user'] = $id;
+        $data['name'] = $show->getName();
+        $data['email'] = $show->getEmail();
+        $data['question'] = $show->getQuestion();
+
+        $json = json_encode($data);
+        file_put_contents("../public/json/".rand().".json", $json);
+        return $this->redirectToRoute('app_messages');
+
+        return $this->render('messages/show.html.twig', [
+            'controller_name' => 'MessagesController',
+            'show' => $show,
         ]);
     }
 

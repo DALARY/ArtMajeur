@@ -14,6 +14,8 @@
             <h2>{{ message.name }}</h2>
             <span>{{ message.email }}</span>
             <div>{{ message.question}}</div>
+            
+            {# Bouton pour l'accès admin des messages #}
             {% if is_granted('ROLE_ADMIN') %}
                 <button><a href="{{ path('app_messages_show', {'id': message.id}) }}">Voir</a></button>
             {% endif %}

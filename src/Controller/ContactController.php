@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ContactController extends AbstractController
 {
+    // Formulaire de demande
     #[Route('artmajeur/contact', name: 'app_contact')]
     public function index(ManagerRegistry $doctrine, Request $request): Response
     {

@@ -14,8 +14,8 @@ class Vu
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $valide = null;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $valide = null;
 
     #[ORM\OneToOne(inversedBy: 'vu', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
@@ -26,12 +26,12 @@ class Vu
         return $this->id;
     }
 
-    public function getValide(): ?int
+    public function getValide(): ?string
     {
         return $this->valide;
     }
 
-    public function setValide(int $valide): self
+    public function setValide(string $valide): self
     {
         $this->valide = $valide;
 

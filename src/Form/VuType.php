@@ -16,9 +16,8 @@ class VuType extends AbstractType
         $builder
             ->add('valide', CheckboxType::class, [
                 'required' => false,
-                'value' => 1,
+                'value' => "1",
             ])
-            ->add('save', SubmitType::class)
         ;
     }
 

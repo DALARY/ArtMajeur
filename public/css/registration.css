@@ -1,0 +1,11 @@
+h1 {
+    text-align: center;
+    font-size: 54px;
+    margin-top: 2%;
+}
+form {
+    margin: 5% 20% 10% 20%;
+}
+form>div:nth-of-type(3)>label {
+    margin-right: 1%;
+}

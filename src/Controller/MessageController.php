@@ -20,6 +20,7 @@ class MessageController extends AbstractController
         if ($this->isGranted('ROLE_ADMIN')) {
             $entityManager = $doctrine->getManager();
             $messages = $entityManager->getRepository(Contact::class)->findAll();
+            $vu = $entityManager->getRepository(Vu::class)->findAll();
 
         } elseif ($this->isGranted('ROLE_USER')) {
             $user = $this->getUser();
@@ -30,6 +31,7 @@ class MessageController extends AbstractController
         return $this->render('messages/index.html.twig', [
             'controller_name' => 'MessagesController',
             'messages' => $messages,
+            'vu' => $vu,
         ]);
     }
 
@@ -73,9 +75,15 @@ class MessageController extends AbstractController
         $data['question'] = $show->getQuestion();
 
         $json = json_encode($data);
-        file_put_contents("../public/json/".rand().".json", $json);
-        return $this->redirectToRoute('app_messages');
-
+        if (!is_dir('../public/json')) {
+            mkdir("../public/json");
+            file_put_contents("../public/json/".rand().".json", $json);
+            return $this->redirectToRoute('app_messages');
+        } else {
+            file_put_contents("../public/json/".rand().".json", $json);
+            return $this->redirectToRoute('app_messages');
+        }
+        
         return $this->render('messages/show.html.twig', [
             'controller_name' => 'MessagesController',
             'show' => $show,

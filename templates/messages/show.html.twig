@@ -1,21 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MessagesController!{% endblock %}
-
+{% block title %}Messagerie de {{ show.name }}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/messages_show.css') }}">
+{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <div>
-        <h2>{{ show.name }}</h2>
-        <span>{{ show.email }}</span>
-        <div>{{ show.question}}</div>
-        {{form(form)}}
-        <button><a href="{{ path("app_messages_json", {'id': show.id}) }}">Json</a></button>
-    </div>
+<div id="return">
+    <button type="button" class="btn btn-link"><a href="{{ path('app_messages') }}">Retour</a></button>
 </div>
+<h1>Message de {{ show.name }}</h1>
+<main>
+    <div>
+        <div>
+            <h2>De: {{ show.name }}</h2>
+            <h4>Email: {{ show.email }}</h4>
+        </div>
+        <p>{{ show.question}}</p>
+        {{ form_start(form) }}
+            {{ form_row(form.valide, {
+            label: 'Valide le message'
+        }) }}
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <button class="btn btn-link"><a href="{{ path("app_messages_json", {'id': show.id}) }}">Json</a></button>
+        {{ form_end(form) }}
+    </div>
+<main>
 {% endblock %}
 

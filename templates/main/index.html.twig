@@ -1,18 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
-
+{% block title %}ArtMajeur{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-    <ul>
-        <li><a href="{{ path('app_messages') }}">Messages</a></li>
-        <li><a href="{{ path("app_contact") }}">Contactez-nous</a></li>
-    </ul>
-</div>
+<header>
+    {%  if  is_granted ( 'IS_AUTHENTICATED_REMEMBERED' )  %}
+        <div>
+            <button type="button" class="btn btn-link"><a href="{{ path('app_logout') }}">Deconnexion</a></button>
+        </div>
+    {% else %}
+        <div>
+            <button type="button" class="btn btn-link"><a href="{{ path('app_login') }}">Connexion</a></button>
+            <button type="button" class="btn btn-link"><a href="{{ path('app_register') }}">S'inscrire</a></button>
+        </div>
+    {% endif %}
+    <h1>Art Majeur</h1>
+    <div>
+        <nav>
+            <ul>
+                <li><button type="button" class="btn btn-link"><a href="#">Peinture</a></button></li>
+                <li><button type="button" class="btn btn-link"><a href="#">Sculpture</a></button></li>
+                <li><button type="button" class="btn btn-link"><a href="#">Photographie</a></button></li>
+                <li><button type="button" class="btn btn-link"><a href="#">Dessin</a></button></li>
+                <li><button type="button" class="btn btn-link"><a href="#">Autres supports</a></button></li>
+                <li><button type="button" class="btn btn-link"><a href="#">Artistes</a></button></li>
+                <li><button type="button" class="btn btn-link"><a href="#">Plus +</a></button></li>
+                {%  if  is_granted ( 'IS_AUTHENTICATED_REMEMBERED' )  %}
+                    <li><button type="button" class="btn btn-link"><a href="{{ path('app_messages') }}">Messages</a></button></li>
+                {% endif %}
+                <li><button type="button" class="btn btn-link"><a href="{{ path('app_contact') }}">Contactez-nous</a></button></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main>
+    <div>
+        <article>
+            <h2>Qu'est-ce que ArtMajeur?</h2>
+                <div>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rutrum justo iaculis venenatis tincidunt. Praesent fermentum dapibus turpis et tristique. Etiam sollicitudin cursus neque, a hendrerit mauris. Nunc vestibulum risus velit. Vivamus sit amet tellus varius urna imperdiet gravida. Aenean pellentesque orci a lectus laoreet vestibulum. Aliquam erat volutpat. Duis et mollis odio, vitae sollicitudin ex. Duis eu condimentum justo, eget pellentesque felis. Nunc sit amet nisl id lacus laoreet pulvinar quis quis velit. Aenean tempus porttitor mi, vitae imperdiet orci pellentesque gravida.
+
+                    Fusce suscipit justo sem, eu placerat magna varius at. Ut tincidunt pulvinar sem. Sed id dui non est blandit dictum. Curabitur vitae volutpat dolor. Mauris sagittis egestas urna, eget blandit ipsum finibus nec. Nulla volutpat eu justo non convallis. Etiam non tristique justo. Vivamus ut malesuada libero. Morbi eget enim vel nunc facilisis hendrerit. Praesent sollicitudin dui justo, ut egestas ex lacinia quis.<br>
+
+                    Ut ornare lacus quis nulla sollicitudin, vel scelerisque erat placerat. Donec posuere varius arcu volutpat viverra. Nullam tincidunt justo vitae ex hendrerit ullamcorper. Nam pretium quis est nec consequat. Curabitur vel nisi lacinia, congue dui quis, consectetur dolor. Duis metus augue, ultrices non vehicula ac, vestibulum sagittis massa. Maecenas ut dolor sit amet nulla porta tempor. Sed a augue pharetra magna imperdiet consequat.
+
+                    Suspendisse ac erat libero. Etiam iaculis, erat eu aliquet ullamcorper, erat massa porta quam, at ultricies sem ligula nec tortor. In at porttitor mauris. Mauris hendrerit justo quis nibh lacinia elementum. Cras ornare finibus faucibus. Cras aliquet, arcu eu vehicula rhoncus, metus orci iaculis nisi, et iaculis sapien sem nec arcu. Vivamus tellus ex, laoreet eu nunc et, posuere sodales orci. Cras sodales varius neque, in placerat urna ornare vitae.
+
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque auctor quis odio vel congue. Curabitur vitae lorem ac augue commodo faucibus. Nam erat turpis, rhoncus at vulputate eu, eleifend nec quam. Etiam eu turpis sit amet purus cursus vulputate. Nam sit amet risus sapien. Praesent auctor, sem vel consectetur euismod, urna lacus porta justo, id consectetur ante turpis posuere orci. Nulla consectetur tincidunt metus. Pellentesque vel libero sed diam imperdiet pretium. Maecenas at diam eu sem volutpat porta ut in lectus. Donec rhoncus dolor sit amet ipsum volutpat interdum. Praesent nec odio auctor, mollis sem vitae, efficitur lorem. Mauris vehicula odio in urna ullamcorper ullamcorper.
+                </div>
+        </article>
+    </div>
+</main>
+<footer>
+    <div>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus non dolor eget tristique. Vestibulum et orci in neque tempor eleifend. Nam tellus ligula, facilisis in massa et, bibendum posuere quam. Donec justo quam, aliquet quis interdum ut, scelerisque at lectus. Nullam egestas interdum ligula. Nullam nec aliquet magna, sed blandit leo. Integer convallis velit vel diam laoreet auctor. Aliquam pharetra eleifend mi. Sed ut nisl volutpat, consectetur turpis eget, pulvinar nisl. Proin consequat vitae felis ac convallis. Vivamus tempor facilisis metus. Integer in faucibus eros, nec aliquam nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+    <div>
+</footer
+
 {% endblock %}

@@ -18,11 +18,8 @@
         </div>
         <p>{{ show.question}}</p>
         {{ form_start(form) }}
-            {{ form_row(form.valide, {
-            label: 'Valide le message'
-        }) }}
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
-        <button class="btn btn-link"><a href="{{ path("app_messages_json", {'id': show.id}) }}">Json</a></button>
+            <button type="submit" class="btn btn-primary">Validé</button>
+            <button class="btn btn-link"><a href="{{ path("app_messages_json", {'id': show.id}) }}">Crée un fichier Json</a></button>
         {{ form_end(form) }}
     </div>
 <main>

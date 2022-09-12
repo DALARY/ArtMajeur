@@ -19,16 +19,16 @@
                     <p class="card-text">{{ message.question}}</p>
                     {# Bouton pour l'accès admin des messages #}
                     {% if is_granted('ROLE_ADMIN') %}
-                        <button class="btn btn_link"><a href="{{ path('app_messages_show', {'id': message.id}) }}">Voir</a></button>
-                        {# {% if vu.valide == '1' %}
-                            <span>vu</span>
-                        {% elseif vu.valide == '0' %}
-                        
-                        {% endif %} #}
+                        <div id="admin">
+                            <button class="btn btn_link"><a href="{{ path('app_messages_show', {'id': message.id}) }}">Voir</a></button>
+                            {% if message.valide == 1 %}
+                                <span>Message Validé</span>
+                            {% endif %}
+                        </div>
                     {% endif %}
                 </div>
             </div>           
         </div>
-    {% endfor %}  
+    {% endfor %}
 <main>
 {% endblock %}

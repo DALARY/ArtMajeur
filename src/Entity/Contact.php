@@ -27,8 +27,8 @@ class Contact
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\OneToOne(mappedBy: 'message', cascade: ['persist', 'remove'])]
-    private ?Vu $vu = null;
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $valide = null;
 
     public function getId(): ?int
     {
@@ -83,19 +83,14 @@ class Contact
         return $this;
     }
 
-    public function getVu(): ?Vu
+    public function getValide(): ?int
     {
-        return $this->vu;
+        return $this->valide;
     }
 
-    public function setVu(Vu $vu): self
+    public function setValide(int $valide): self
     {
-        // set the owning side of the relation if necessary
-        if ($vu->getMessage() !== $this) {
-            $vu->setMessage($this);
-        }
-
-        $this->vu = $vu;
+        $this->valide = $valide;
 
         return $this;
     }

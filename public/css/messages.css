@@ -19,3 +19,17 @@ main>div>div:nth-of-type(1) {
     text-transform: uppercase;
     font-weight: bold;
 }
+#admin {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+#admin>button {
+    justify-self: start;
+}
+#admin>span {
+    justify-self: end;
+    color: green;
+    text-transform: uppercase;
+    font-weight: bold;
+}

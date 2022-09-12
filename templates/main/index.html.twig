@@ -7,7 +7,7 @@
 {% block body %}
 
 <header>
-    {%  if  is_granted ( 'IS_AUTHENTICATED_REMEMBERED' )  %}
+    {%  if  is_granted ( 'IS_AUTHENTICATED' )  %}
         <div>
             <button type="button" class="btn btn-link"><a href="{{ path('app_logout') }}">Deconnexion</a></button>
         </div>
@@ -28,7 +28,7 @@
                 <li><button type="button" class="btn btn-link"><a href="#">Autres supports</a></button></li>
                 <li><button type="button" class="btn btn-link"><a href="#">Artistes</a></button></li>
                 <li><button type="button" class="btn btn-link"><a href="#">Plus +</a></button></li>
-                {%  if  is_granted ( 'IS_AUTHENTICATED_REMEMBERED' )  %}
+                {%  if  is_granted ( 'IS_AUTHENTICATED' )  %}
                     <li><button type="button" class="btn btn-link"><a href="{{ path('app_messages') }}">Messages</a></button></li>
                 {% endif %}
                 <li><button type="button" class="btn btn-link"><a href="{{ path('app_contact') }}">Contactez-nous</a></button></li>

@@ -3,8 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
-use App\Entity\Vu;
-use App\Form\VuType;
+use App\Form\ValideType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +19,6 @@ class MessageController extends AbstractController
         if ($this->isGranted('ROLE_ADMIN')) {
             $entityManager = $doctrine->getManager();
             $messages = $entityManager->getRepository(Contact::class)->findAll();
-            $vu = $entityManager->getRepository(Vu::class)->findAll();
 
         } elseif ($this->isGranted('ROLE_USER')) {
             $user = $this->getUser();
@@ -31,7 +29,6 @@ class MessageController extends AbstractController
         return $this->render('messages/index.html.twig', [
             'controller_name' => 'MessagesController',
             'messages' => $messages,
-            'vu' => $vu,
         ]);
     }
 
@@ -42,14 +39,12 @@ class MessageController extends AbstractController
         $entityManager = $doctrine->getManager();
         $show = $entityManager->getRepository(Contact::class)->find($id);
 
-        $vu = new Vu();
-        $form = $this->createForm(VuType::class, $vu);
+        $form = $this->createForm(ValideType::class, $show);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $vu->setValide($form['valide']->getData());
-            $show->setVu($vu);
+            $show->setValide(1);
 
-            $entityManager->persist($vu);
+            $entityManager->persist($show);
             $entityManager->flush();
             return $this->redirectToRoute('app_messages');
         }

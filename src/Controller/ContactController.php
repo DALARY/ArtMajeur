@@ -26,6 +26,7 @@ class ContactController extends AbstractController
             $contact->setName($form['name']->getData());
             $contact->setEmail($form['email']->getData());
             $contact->setQuestion($form['question']->getData());
+            $contact->setValide(0);
             $contact->setUser($user);
 
             $entityManager->persist($contact);

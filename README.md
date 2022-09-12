@@ -7,6 +7,6 @@ Page "Inscription" de compte comporte :
 Page "Contact" comporte :
 - Un formulaire avec Nom, Email et Question.
 Page "Messagerie" comporte :
-- Un affichage de tout les messages de l'utilisateur et du coté admin de tout les messages des différents utilisateurs.
-- Une partie adminisatrateur qui puisse validé le message et crée un fichier JSON unique à partir du message de l'utilisateur concerner.
--! Un utilisateur doit avoir un compte pour pouvoir envoyer une requête au support.
+- Un affichage de tous les messages de l'utilisateur et du coté admin de tous les messages des différents utilisateurs.
+- Une partie administrative pour qu'il puisse valider le message et crée un fichier JSON unique à partir du message de l'utilisateur concerné.
+- Important ! Un utilisateur doit avoir un compte pour pouvoir envoyer une requête au support.
